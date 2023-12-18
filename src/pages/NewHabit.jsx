@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./NewHabit.css"
 
 const NewHabit = () => {
   const [title, setTitle] = useState("");
@@ -42,20 +43,19 @@ const NewHabit = () => {
   };
 
   return (
-    <>
+    <main>
       <h1>Skapa en ny vana</h1>
       <div>
         <form onSubmit={handleSubmit}>
+          <div className="form--cont">
           <label htmlFor="">
             <h2>Titel:</h2>
             <input type="text" value={title} onChange={handleTitleChange} placeholder="t.ex Städa" />
           </label>
-          <br />
           <label>
             <h3>Startvärde för streak:</h3>
             <input type="number" value={startValue} onChange={handleStartValueChange} />
           </label>
-          <br />
           <label>
             <h4>Prioritet:</h4>
             <select value={priority} onChange={handlePriorityChange}>
@@ -64,7 +64,7 @@ const NewHabit = () => {
               <option value="Hög">Hög</option>
             </select>
           </label>
-          <br />
+          </div>
           <button type="submit">Skapa vana</button>
         </form>
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
@@ -84,7 +84,7 @@ const NewHabit = () => {
           ))}
         </div>
       )}
-    </>
+    </main>
   );
 };
 
