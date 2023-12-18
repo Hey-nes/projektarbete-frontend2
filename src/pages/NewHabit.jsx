@@ -3,8 +3,9 @@ import React, { useState } from "react";
 const NewHabit = () => {
   const [title, setTitle] = useState("");
   const [startValue, setStartValue] = useState(0);
-  const [priority, setPriority] = useState('low');
-  const [habits, setHabits] = useState([]); // Lista för att spara vanor
+  const [priority, setPriority] = useState('Låg');
+  const [habits, setHabits] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -21,17 +22,23 @@ const NewHabit = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (title.trim() === "") {
+      setErrorMessage("Ange titel!");
+      return;
+    }
+
     const newHabit = {
       title: title,
       startValue: startValue,
       priority: priority,
     };
 
-    setHabits([...habits, newHabit]); // Lägg till den nya vanan till listan
+    setHabits([...habits, newHabit]);
 
     setTitle('');
     setStartValue(0);
-    setPriority('low');
+    setPriority('Låg');
+    setErrorMessage("");
   };
 
   return (
@@ -40,29 +47,30 @@ const NewHabit = () => {
       <div>
         <form onSubmit={handleSubmit}>
           <label htmlFor="">
-            Titel:
+            <h2>Titel:</h2>
             <input type="text" value={title} onChange={handleTitleChange} placeholder="t.ex Städa" />
           </label>
           <br />
           <label>
-            Startvärde för streak:
+            <h3>Startvärde för streak:</h3>
             <input type="number" value={startValue} onChange={handleStartValueChange} />
           </label>
           <br />
           <label>
-            Prioritet:
+            <h4>Prioritet:</h4>
             <select value={priority} onChange={handlePriorityChange}>
-              <option value="low">Låg</option>
-              <option value="medium">Mellan</option>
-              <option value="high">Hög</option>
+              <option value="Låg">Låg</option>
+              <option value="Mellan">Mellan</option>
+              <option value="Hög">Hög</option>
             </select>
           </label>
           <br />
           <button type="submit">Skapa vana</button>
         </form>
+        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       </div>
       
-      {/* Visa alla skapade vanor */}
+      
       {habits.length > 0 && (
         <div>
           <h2>Alla dina vanor:</h2>
