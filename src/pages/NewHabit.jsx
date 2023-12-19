@@ -51,6 +51,7 @@ const NewHabit = () => {
           <label htmlFor="">
             <h2>Title:</h2>
             <input type="text" value={title} onChange={handleTitleChange} placeholder="Clean room etc." />
+            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
           </label>
           <label>
             <h3>Startvalue for streak:</h3>
@@ -67,7 +68,6 @@ const NewHabit = () => {
           </div>
           <button type="submit">Create new habit</button>
         </form>
-        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       </div>
       
       
