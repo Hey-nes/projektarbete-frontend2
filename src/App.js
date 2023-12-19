@@ -1,19 +1,21 @@
+import React, { useState } from "react";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import NewTask from "./pages/NewTask";
 import Tasks from "./pages/Tasks";
 import NewHabit from "./pages/NewHabit";
 import Habits from "./pages/Habits";
 import Friends from "./pages/Friends";
-import { Link } from "react-router-dom";
 
 const App = () => {
+  const [habits, setHabits] = useState([]); 
+
   return (
     <>
       <nav>
         <ul>
-          <li>
+        <li>
             <Link to="/">Home</Link>
           </li>
           <li>
@@ -34,8 +36,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/newtask" element={<NewTask />} />
         <Route path="/tasks" element={<Tasks />} />
-        <Route path="/newhabit" element={<NewHabit />} />
-        <Route path="/habits" element={<Habits />} />
+        <Route path="/newhabit" element={<NewHabit habits={habits} setHabits={setHabits} />} />
+        <Route path="/habits" element={<Habits habits={habits} setHabits={setHabits} />} />
         <Route path="/friends" element={<Friends />} />
       </Routes>
     </>
@@ -43,3 +45,4 @@ const App = () => {
 };
 
 export default App;
+

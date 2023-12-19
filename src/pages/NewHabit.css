@@ -18,7 +18,6 @@ main div{
 }
 
 form{
-    background-color: lightblue;
     display: flex;
     flex-direction: column;
 }
