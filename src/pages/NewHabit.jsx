@@ -4,7 +4,7 @@ import "./NewHabit.css"
 const NewHabit = () => {
   const [title, setTitle] = useState("");
   const [startValue, setStartValue] = useState(0);
-  const [priority, setPriority] = useState('Låg');
+  const [priority, setPriority] = useState('Low');
   const [habits, setHabits] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -24,7 +24,7 @@ const NewHabit = () => {
     e.preventDefault();
 
     if (title.trim() === "") {
-      setErrorMessage("Ange titel!");
+      setErrorMessage("Enter a title!");
       return;
     }
 
@@ -38,34 +38,34 @@ const NewHabit = () => {
 
     setTitle('');
     setStartValue(0);
-    setPriority('Låg');
+    setPriority('Low');
     setErrorMessage("");
   };
 
   return (
     <main>
-      <h1>Skapa en ny vana</h1>
+      <h1>Create a new habit</h1>
       <div>
         <form onSubmit={handleSubmit}>
           <div className="form--cont">
           <label htmlFor="">
-            <h2>Titel:</h2>
-            <input type="text" value={title} onChange={handleTitleChange} placeholder="t.ex Städa" />
+            <h2>Title:</h2>
+            <input type="text" value={title} onChange={handleTitleChange} placeholder="Clean room etc." />
           </label>
           <label>
-            <h3>Startvärde för streak:</h3>
+            <h3>Startvalue for streak:</h3>
             <input type="number" value={startValue} onChange={handleStartValueChange} />
           </label>
           <label>
-            <h4>Prioritet:</h4>
+            <h4>Priority:</h4>
             <select value={priority} onChange={handlePriorityChange}>
-              <option value="Låg">Låg</option>
-              <option value="Mellan">Mellan</option>
-              <option value="Hög">Hög</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="high">High</option>
             </select>
           </label>
           </div>
-          <button type="submit">Skapa vana</button>
+          <button type="submit">Create new habit</button>
         </form>
         {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       </div>
@@ -73,13 +73,13 @@ const NewHabit = () => {
       
       {habits.length > 0 && (
         <div>
-          <h2>Alla dina vanor:</h2>
+          <h2>All your habits:</h2>
           {habits.map((habit, index) => (
             <div key={index}>
               <h3>Vana {index + 1}:</h3>
-              <p>Titel: {habit.title}</p>
-              <p>Startvärde för streak: {habit.startValue}</p>
-              <p>Prioritet: {habit.priority}</p>
+              <p>Title: {habit.title}</p>
+              <p>Startvalue for streak: {habit.startValue}</p>
+              <p>Priority: {habit.priority}</p>
             </div>
           ))}
         </div>
