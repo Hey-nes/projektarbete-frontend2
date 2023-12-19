@@ -7,6 +7,44 @@
   pointer-events: none;
 }
 
+.appNav ul {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 2px solid white;
+  padding: 2rem;
+  list-style-type: none;
+}
+
+.appNav a {
+  color: white;
+  cursor: pointer;
+}
+
+.appNav a:hover {
+  color: blue;
+}
+
+.friendComponent {
+  width: 75%;
+  margin:  auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.friendComponent h1 {
+  text-align: center;
+}
+
+.friend {
+  cursor: pointer;
+}
+
+.friend, .friendInfo {
+  width: 75%;
+  margin: 0 auto;
+  text-align: center;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

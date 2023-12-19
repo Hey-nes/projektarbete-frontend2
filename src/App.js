@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const App = () => {
   return (
     <>
-      <nav>
+      <nav className="appNav">
         <ul>
           <li>
             <Link to="/">Home</Link>
