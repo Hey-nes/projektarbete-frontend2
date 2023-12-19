@@ -105,7 +105,9 @@ const Friends = () => {
       />
 
       <h2>Sort</h2>
-      <button onClick={() => setSortCriteria("firstName")}>Sort by First Name</button>
+      <button onClick={() => setSortCriteria("firstName")}>
+        Sort by First Name
+      </button>
       <button onClick={() => setSortCriteria("lastName")}>
         Sort by Last Name
       </button>
