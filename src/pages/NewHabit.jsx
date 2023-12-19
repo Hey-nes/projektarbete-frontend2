@@ -76,7 +76,7 @@ const NewHabit = () => {
           <h2>All your habits:</h2>
           {habits.map((habit, index) => (
             <div key={index}>
-              <h3>Vana {index + 1}:</h3>
+              <h3>Habit {index + 1}:</h3>
               <p>Title: {habit.title}</p>
               <p>Startvalue for streak: {habit.startValue}</p>
               <p>Priority: {habit.priority}</p>
