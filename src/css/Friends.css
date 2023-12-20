@@ -1,0 +1,20 @@
+.friendComponent {
+  width: 75%;
+  margin:  auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.friendComponent h1 {
+  text-align: center;
+}
+
+.friend {
+  cursor: pointer;
+}
+
+.friend, .friendInfo {
+  width: 75%;
+  margin: 0 auto;
+  text-align: center;
+}
