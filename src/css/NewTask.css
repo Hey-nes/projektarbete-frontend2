@@ -1,0 +1,14 @@
+.taskWrapper {
+  width: 75%;
+  margin:  auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.taskWrapper h1, h2, h3 {
+  text-align: center;
+}
+
+.taskWrapper li {
+  list-style-type: none;
+}
