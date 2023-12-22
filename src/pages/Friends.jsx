@@ -73,7 +73,7 @@ const Friends = () => {
   };
 
   return (
-    <div className="friendComponent">
+    <main className="main">
       <h1>My friends</h1>
       <h2>Filter</h2>
       <label htmlFor="gender">Gender: </label>
@@ -138,7 +138,7 @@ const Friends = () => {
           )}
         </div>
       ))}
-    </div>
+    </main>
   );
 };
 

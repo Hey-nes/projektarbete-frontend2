@@ -1,40 +1,102 @@
 import { useState } from "react";
-import "../css/NewTask.css";
 
 const NewTask = () => {
   const [tasks, setTasks] = useState([]);
-  const addTask = () => {};
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [time, setTime] = useState("");
+  const [type, setType] = useState("");
+
+  const addTask = () => {
+    const newTask = {
+      title: title,
+      description: description,
+      time: time,
+      type: type,
+    };
+
+    setTasks([...tasks, newTask]);
+
+    setTitle("");
+    setDescription("");
+    setTime("");
+    setType("");
+  };
+
   const getTask = () => {
     fetch("https://www.boredapi.com/api/activity/")
       .then((res) => res.json())
       .then((data) => {
-        setTasks(data);
+        setTitle(data.activity);
+        setType(data.type);
       });
   };
 
   return (
-    <div className="taskWrapper">
+    <main className="main">
       <h1>Create a New Task</h1>
       <label htmlFor="title">Title:</label>
-      <input type="text" name="title" placeholder={tasks ? tasks.activity : ""}/>
+      <input
+        type="text"
+        name="title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
       <label htmlFor="description">Description:</label>
-      <input type="text" name="description" />
+      <input
+        type="text"
+        name="description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
       <label htmlFor="time">Estimated Time:</label>
-      <input type="text" name="time" />
+      <input
+        type="text"
+        name="time"
+        value={time}
+        onChange={(e) => setTime(e.target.value)}
+      />
       <label htmlFor="type">Type of Task:</label>
-      <select name="type" id="type">
-        <option value="" disabled selected>
+      <select
+        name="type"
+        id="type"
+        value={type}
+        onChange={(e) => setType(e.target.value)}
+      >
+        <option value="" disabled defaultValue>
           Select type of task
         </option>
-        <option value="chore">Home chore</option>
-        <option value="friends">Activity with Friends</option>
-        <option value="work">Work task</option>
+        <option value="relaxation">relaxation</option>
+        <option value="recreatioinal">recreatioinal</option>
+        <option value="social">social</option>
+        <option value="education">education</option>
+        <option value="busywork">busywork</option>
+        <option value="charity">charity</option>
+        <option value="diy">diy</option>
+        <option value="cooking">cooking</option>
+        <option value="music">music</option>
       </select>
       <button onClick={addTask}>Add task</button>
       <h2>Don't Know What to Do?</h2>
       <button onClick={getTask}>Press this button to get a random task</button>
       <h3>Your tasks:</h3>
-    </div>
+      {tasks.map((task) => (
+        <ul key={task.title}>
+          <li>
+            <strong>Title:</strong> {task.title}
+          </li>
+          <li>
+            <strong>Description:</strong> {task.description}
+          </li>
+          <li>
+            <strong>Estimated time: </strong> {task.time}
+          </li>
+          <li>
+            <strong>Type: </strong> {task.type}
+          </li>
+        </ul>
+      ))}
+    </main>
   );
 };
 

@@ -10,18 +10,33 @@
 .appNav ul {
   display: flex;
   justify-content: space-around;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid black;
   padding: 2rem;
   list-style-type: none;
 }
 
 .appNav a {
-  color: white;
+  color: black;
   cursor: pointer;
 }
 
 .appNav a:hover {
   color: blue;
+}
+
+.main {
+  width: 75%;
+  margin:  auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.main h1, h2, h3 {
+  text-align: center;
+}
+
+.main li {
+  list-style-type: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
