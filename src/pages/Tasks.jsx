@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Tasks = ({ data }) => {
+const Tasks = ({ data, onDelete, onEdit }) => {
   const [completedTasks, setCompletedTasks] = useState([]);
   const [incompletedTasks, setIncompletedTasks] = useState([]);
 
@@ -17,6 +17,18 @@ const Tasks = ({ data }) => {
   const handleToggleUnfinished = (task) => {
     setCompletedTasks(completedTasks.filter((t) => t !== task));
     setIncompletedTasks([...incompletedTasks, task]);
+  };
+
+  const handleDelete = (task) => {
+    onDelete(task);
+    setCompletedTasks(completedTasks.filter((t) => t !== task));
+  };
+
+  const handleEdit = (task) => {
+    onEdit(task);
+    setIncompletedTasks((prevIncompletedTasks) =>
+      prevIncompletedTasks.filter((t) => t !== task)
+    );
   };
 
   return (
@@ -45,6 +57,8 @@ const Tasks = ({ data }) => {
               <button onClick={() => handleToggleCompletion(task)}>
                 {task.completed ? "Mark as unfinished" : "Mark as finished"}
               </button>
+              <button onClick={() => handleEdit(task)}>Edit</button>
+              <button onClick={() => handleDelete(task)}>Delete</button>
             </div>
           ))}
       </ul>

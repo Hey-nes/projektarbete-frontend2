@@ -7,6 +7,7 @@ const NewTask = () => {
   const [description, setDescription] = useState("");
   const [time, setTime] = useState("");
   const [type, setType] = useState("");
+  const [selectedTask, setSelectedTask] = useState(null);
 
   const addTask = () => {
     const newTask = {
@@ -32,6 +33,19 @@ const NewTask = () => {
         setTitle(data.activity);
         setType(data.type);
       });
+  };
+
+  const handleDelete = (taskToDelete) => {
+    setTasks(tasks.filter((task) => task !== taskToDelete));
+  };
+
+  const handleEdit = (taskToEdit) => {
+    setSelectedTask(taskToEdit);
+    setTitle(taskToEdit.title);
+    setDescription(taskToEdit.description);
+    setTime(taskToEdit.time);
+    setType(taskToEdit.type);
+    setTasks(tasks.filter((task) => task !== taskToEdit));
   };
 
   return (
@@ -82,7 +96,7 @@ const NewTask = () => {
       <h2>Don't Know What to Do?</h2>
       <button onClick={getTask}>Press this button to get a random task</button>
       <h2>Your tasks:</h2>
-      <Tasks data={tasks} />
+      <Tasks data={tasks} onDelete={handleDelete} onEdit={handleEdit} />
     </main>
   );
 };
