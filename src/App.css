@@ -26,17 +26,34 @@
 
 .main {
   width: 75%;
-  margin:  auto;
+  margin: auto;
   display: flex;
   flex-direction: column;
 }
 
-.main h1, h2, h3 {
+.main h1,
+h2,
+h3 {
   text-align: center;
 }
 
 .main li {
   list-style-type: none;
+}
+
+.main div {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.main li {
+  text-align: left;
+}
+
+/* This class is specific to the friends component */
+.friend {
+  cursor: pointer;
 }
 
 @media (prefers-reduced-motion: no-preference) {

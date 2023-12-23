@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Tasks from "./Tasks";
 
 const NewTask = () => {
   const [tasks, setTasks] = useState([]);
@@ -13,6 +14,7 @@ const NewTask = () => {
       description: description,
       time: time,
       type: type,
+      completed: false,
     };
 
     setTasks([...tasks, newTask]);
@@ -49,9 +51,9 @@ const NewTask = () => {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
-      <label htmlFor="time">Estimated Time:</label>
+      <label htmlFor="time">Estimated Time in Hours:</label>
       <input
-        type="text"
+        type="number"
         name="time"
         value={time}
         onChange={(e) => setTime(e.target.value)}
@@ -79,23 +81,8 @@ const NewTask = () => {
       <button onClick={addTask}>Add task</button>
       <h2>Don't Know What to Do?</h2>
       <button onClick={getTask}>Press this button to get a random task</button>
-      <h3>Your tasks:</h3>
-      {tasks.map((task) => (
-        <ul key={task.title}>
-          <li>
-            <strong>Title:</strong> {task.title}
-          </li>
-          <li>
-            <strong>Description:</strong> {task.description}
-          </li>
-          <li>
-            <strong>Estimated time: </strong> {task.time}
-          </li>
-          <li>
-            <strong>Type: </strong> {task.type}
-          </li>
-        </ul>
-      ))}
+      <h2>Your tasks:</h2>
+      <Tasks data={tasks} />
     </main>
   );
 };

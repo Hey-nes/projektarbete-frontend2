@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "../css/Friends.css"
 
 const Friends = () => {
   const [friends, setFriends] = useState([]);
@@ -130,10 +129,20 @@ const Friends = () => {
             <img src={friend.picture.large} alt="profile picture" />
           </div>
           {friend.showMore && (
-            <div className="friendInfo">
-              <p>E-mail: {friend.email}</p>
-              <p>Date of birth: {friend.dob.date}</p>
-              <p>Gender: {friend.gender}</p>
+            <div>
+              <ul>
+                <li>
+                  <strong>E-mail: </strong>
+                  {friend.email}
+                </li>
+                <li>
+                  <strong>Date of birth: </strong>
+                  {friend.dob.date}
+                </li>
+                <li>
+                  <strong>Gender: </strong> {friend.gender}
+                </li>
+              </ul>
             </div>
           )}
         </div>
