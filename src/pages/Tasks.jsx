@@ -1,8 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { sortItems } from "../utilities/sortingUtility";
+
+const getValueForSorting = (task, criteria) => {
+  switch (criteria) {
+    case "title":
+      return task.title.toLowerCase();
+    case "time":
+      return task.time.toLowerCase();
+    default:
+      return "";
+  }
+};
 
 const Tasks = ({ data, onDelete, onEdit }) => {
   const [completedTasks, setCompletedTasks] = useState([]);
   const [incompletedTasks, setIncompletedTasks] = useState([]);
+  const [sortCriteria, setSortCriteria] = useState("title");
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [sortedIncompletedTasks, setSortedIncompletedTasks] = useState([]);
+
+  useEffect(() => {
+    const tasksToSort = data.filter((task) => !completedTasks.includes(task));
+    const sortedTasks = sortItems(
+      tasksToSort,
+      sortCriteria,
+      sortOrder,
+      getValueForSorting
+    );
+    setSortedIncompletedTasks(sortedTasks);
+  }, [data, completedTasks, sortCriteria, sortOrder]);
 
   const handleToggleCompletion = (task) => {
     if (task.completed) {
@@ -33,34 +59,42 @@ const Tasks = ({ data, onDelete, onEdit }) => {
 
   return (
     <div>
+      <button onClick={() => setSortCriteria("title")}>Sort by Title</button>
+      <button onClick={() => setSortCriteria("time")}>
+        Sort by Time
+      </button>
+      <button
+        onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
+      >
+        Toggle Sort Order (
+        {sortOrder === "asc" ? "Ascending Order" : "Descending Order"})
+      </button>
       <ul>
-        {data
-          .filter((task) => !completedTasks.includes(task))
-          .map((task) => (
-            <div key={task.title}>
-              <li>
-                <strong>Title: </strong>
-                {task.title}
-              </li>
-              <li>
-                <strong>Description: </strong>
-                {task.description}
-              </li>
-              <li>
-                <strong>Estimated time to complete: </strong>
-                {task.time} hour
-              </li>
-              <li>
-                <strong>Task type: </strong>
-                {task.type}
-              </li>
-              <button onClick={() => handleToggleCompletion(task)}>
-                {task.completed ? "Mark as unfinished" : "Mark as finished"}
-              </button>
-              <button onClick={() => handleEdit(task)}>Edit</button>
-              <button onClick={() => handleDelete(task)}>Delete</button>
-            </div>
-          ))}
+        {sortedIncompletedTasks.map((task) => (
+          <div key={task.title}>
+            <li>
+              <strong>Title: </strong>
+              {task.title}
+            </li>
+            <li>
+              <strong>Description: </strong>
+              {task.description}
+            </li>
+            <li>
+              <strong>Estimated time to complete: </strong>
+              {task.time} hour(s)
+            </li>
+            <li>
+              <strong>Task type: </strong>
+              {task.type}
+            </li>
+            <button onClick={() => handleToggleCompletion(task)}>
+              {task.completed ? "Mark as unfinished" : "Mark as finished"}
+            </button>
+            <button onClick={() => handleEdit(task)}>Edit</button>
+            <button onClick={() => handleDelete(task)}>Delete</button>
+          </div>
+        ))}
       </ul>
       {completedTasks.length > 0 && (
         <div>
@@ -69,20 +103,7 @@ const Tasks = ({ data, onDelete, onEdit }) => {
             {completedTasks.map((task) => (
               <div key={task.title}>
                 <li>
-                  <strong>Title: </strong>
-                  {task.title}
-                </li>
-                <li>
-                  <strong>Description: </strong>
-                  {task.description}
-                </li>
-                <li>
-                  <strong>Estimated time to complete: </strong>
-                  {task.time} hour
-                </li>
-                <li>
-                  <strong>Task type: </strong>
-                  {task.type}
+                  <strong>{task.title}</strong>
                 </li>
                 <button onClick={() => handleToggleUnfinished(task)}>
                   Mark as unfinished

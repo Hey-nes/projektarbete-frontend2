@@ -1,12 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { sortItems } from "../utilities/sortingUtility";
+
+const getValueForSorting = (friend, criteria) => {
+  switch (criteria) {
+    case "firstName":
+      return friend.name.first.toLowerCase();
+    case "lastName":
+      return friend.name.last.toLowerCase();
+    case "age":
+      return friend.dob.age;
+    default:
+      return "";
+  }
+};
 
 const Friends = () => {
   const [friends, setFriends] = useState([]);
   const [minAge, setMinAge] = useState("");
   const [maxAge, setMaxAge] = useState("");
   const [gender, setGender] = useState("");
-  const [sortCriteria, setSortCriteria] = useState("name");
+  const [sortCriteria, setSortCriteria] = useState("firstName");
   const [sortOrder, setSortOrder] = useState("asc");
+  const [sortedFriends, setSortedFriends] = useState([]);
+
+  useEffect(() => {
+    const filteredFriends = friends.filter((friend) => {
+      const age = friend.dob.age;
+      const genderMatch = !gender || friend.gender === gender;
+      const ageMatch = (!minAge || age >= minAge) && (!maxAge || age <= maxAge);
+
+      return genderMatch && ageMatch;
+    });
+
+    const sortedFriends = sortItems(
+      filteredFriends,
+      sortCriteria,
+      sortOrder,
+      getValueForSorting
+    );
+    setSortedFriends(sortedFriends);
+  }, [friends, gender, minAge, maxAge, sortCriteria, sortOrder]);
 
   const addFriend = () => {
     fetch("https://randomuser.me/api")
@@ -30,51 +63,10 @@ const Friends = () => {
     );
   };
 
-  const filterFriends = () => {
-    return friends.filter((friend) => {
-      const age = friend.dob.age;
-      const genderMatch = !gender || friend.gender === gender;
-      const ageMatch = (!minAge || age >= minAge) && (!maxAge || age <= maxAge);
-
-      return genderMatch && ageMatch;
-    });
-  };
-
-  const sortFriends = (friends, criteria, order) => {
-    const sortedFriends = [...friends];
-
-    sortedFriends.sort((a, b) => {
-      const valueA = getValueForSorting(a, criteria);
-      const valueB = getValueForSorting(b, criteria);
-
-      if (valueA < valueB) {
-        return order === "asc" ? -1 : 1;
-      }
-      if (valueA > valueB) {
-        return order === "asc" ? 1 : -1;
-      }
-      return 0;
-    });
-    return sortedFriends;
-  };
-
-  const getValueForSorting = (friend, criteria) => {
-    switch (criteria) {
-      case "firstName":
-        return friend.name.first.toLowerCase();
-      case "lastName":
-        return friend.name.last.toLowerCase();
-      case "age":
-        return friend.dob.age;
-      default:
-        return "";
-    }
-  };
-
   return (
     <main className="main">
-      <h1>My friends</h1>
-      <h2>Filter</h2>
+      <h2>Your Friends</h2>
+      <h3>Filter</h3>
       <label htmlFor="gender">Gender: </label>
       <select
         name="gender"
@@ -104,7 +96,7 @@ const Friends = () => {
         onChange={(e) => setMaxAge(e.target.value)}
       />
 
-      <h2>Sort</h2>
+      <h4>Sort</h4>
       <button onClick={() => setSortCriteria("firstName")}>
         Sort by First Name
       </button>
@@ -120,12 +112,12 @@ const Friends = () => {
       </button>
 
       <button onClick={addFriend}>Add Friend</button>
-      {sortFriends(filterFriends(), sortCriteria, sortOrder).map((friend) => (
+      {sortedFriends.map((friend) => (
         <div key={friend.login.uuid}>
           <div className="friend" onClick={() => handleShowMore(friend)}>
-            <h3>
+            <h5>
               {friend.name.first} {friend.name.last}
-            </h3>
+            </h5>
             <img src={friend.picture.large} alt="profile picture" />
           </div>
           {friend.showMore && (

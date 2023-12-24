@@ -17,7 +17,7 @@ const App = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/newTask">Your tasks</Link>
+            <Link to="/newTask">Tasks</Link>
           </li>
           <li>
             <Link to="/newhabit">New Habit</Link>
