@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 const Habits = ({ habits, setHabits }) => {
   const [sortKey, setSortKey] = useState('');
 
-  const handleStreakChange = (index, change) => {
-    const updatedHabits = habits.map((habit, i) => {
-      if (i === index) {
+  const handleStreakChange = (selectedHabit, change) => {
+    const updatedHabits = habits.map((habit) => {
+      if (habit === selectedHabit) {
         return { ...habit, streak: Math.max(0, habit.streak + change) };
       }
       return habit;
@@ -32,14 +32,14 @@ const Habits = ({ habits, setHabits }) => {
         <button onClick={() => setSortKey('streak')}>Sort by Streak</button>
         <button onClick={() => setSortKey('priority')}>Sort by Priority</button>
       </div>
-      {sortedHabits.map((habit, index) => (
-        <div key={index}>
+      {sortedHabits.map((habit) => (
+        <div key={habit.title}>
           <h3>{habit.title}</h3>
           <p>Streak: {habit.streak}</p>
           <p>Priority: {habit.priority}</p>
-          <button onClick={() => handleStreakChange(index, -1)} disabled={habit.streak <= 0}>Decrease Streak</button>
-          <button onClick={() => handleStreakChange(index, 1)}>Increase Streak</button>
-          <button onClick={() => handleStreakChange(index, -habit.streak)}>Reset Streak</button>
+          <button onClick={() => handleStreakChange(habit, -1)} disabled={habit.streak <= 0}>Decrease Streak</button>
+          <button onClick={() => handleStreakChange(habit, 1)}>Increase Streak</button>
+          <button onClick={() => handleStreakChange(habit, -habit.streak)}>Reset Streak</button>
         </div>
       ))}
     </div>
