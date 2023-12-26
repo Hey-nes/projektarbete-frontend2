@@ -31,12 +31,11 @@ const NewHabit = ({ habits, setHabits }) => {
       title: title,
       startValue: parseInt(startValue),
       priority: priority,
-      streak: parseInt(startValue), // Lägg till ett streak-värde
+      streak: parseInt(startValue),
     };
 
     setHabits([...habits, newHabit]);
 
-    // Rensa formulärfält
     setTitle('');
     setStartValue(0);
     setPriority('Low');
