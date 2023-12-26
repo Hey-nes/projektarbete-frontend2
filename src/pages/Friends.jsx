@@ -15,7 +15,10 @@ const getValueForSorting = (friend, criteria) => {
 };
 
 const Friends = () => {
-  const [friends, setFriends] = useState([]);
+  const [friends, setFriends] = useState(() => {
+    const storedFriends = JSON.parse(localStorage.getItem("friends"));
+    return storedFriends || [];
+  });
   const [minAge, setMinAge] = useState("");
   const [maxAge, setMaxAge] = useState("");
   const [gender, setGender] = useState("");
@@ -24,6 +27,20 @@ const Friends = () => {
   const [sortedFriends, setSortedFriends] = useState([]);
 
   useEffect(() => {
+    const storedFriends = JSON.parse(localStorage.getItem("friends"));
+    if (storedFriends) {
+      setFriends(storedFriends);
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("friends", JSON.stringify(friends));
+      console.log("Friends saved to local storage:", friends);
+    } catch (error) {
+      console.error("Error saving friends to local storage", error);
+    }
+
     const filteredFriends = friends.filter((friend) => {
       const age = friend.dob.age;
       const genderMatch = !gender || friend.gender === gender;
@@ -47,6 +64,7 @@ const Friends = () => {
       .then((data) => {
         const newFriend = { ...data.results[0], showMore: false };
         setFriends([...friends, newFriend]);
+        console.log("Updated friends:", friends);
       })
       .catch((error) => {
         console.error("Error fetching friend", error);
@@ -62,6 +80,11 @@ const Friends = () => {
       )
     );
   };
+
+  const clearFriends = () => {
+    localStorage.removeItem("friends");
+    setFriends([]);
+  }
 
   return (
     <main className="main">
@@ -112,6 +135,7 @@ const Friends = () => {
       </button>
 
       <button onClick={addFriend}>Add Friend</button>
+      <button onClick={clearFriends}>Clear Friends</button>
       {sortedFriends.map((friend) => (
         <div key={friend.login.uuid}>
           <div className="friend" onClick={() => handleShowMore(friend)}>

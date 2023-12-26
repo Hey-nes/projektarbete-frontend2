@@ -18,6 +18,7 @@
 .appNav a {
   color: black;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .appNav a:hover {
@@ -26,7 +27,7 @@
 
 .main {
   width: 75%;
-  margin: auto;
+  margin: 1rem auto;
   display: flex;
   flex-direction: column;
 }
