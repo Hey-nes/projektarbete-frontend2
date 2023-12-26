@@ -83,7 +83,7 @@ const NewTask = () => {
           Select type of task
         </option>
         <option value="relaxation">relaxation</option>
-        <option value="recreatioinal">recreatioinal</option>
+        <option value="recreational">recreational</option>
         <option value="social">social</option>
         <option value="education">education</option>
         <option value="busywork">busywork</option>

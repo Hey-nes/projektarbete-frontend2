@@ -15,20 +15,26 @@ const getValueForSorting = (task, criteria) => {
 const Tasks = ({ data, onDelete, onEdit }) => {
   const [completedTasks, setCompletedTasks] = useState([]);
   const [incompletedTasks, setIncompletedTasks] = useState([]);
+  const [typeFilter, setTypeFilter] = useState("");
   const [sortCriteria, setSortCriteria] = useState("title");
   const [sortOrder, setSortOrder] = useState("asc");
   const [sortedIncompletedTasks, setSortedIncompletedTasks] = useState([]);
 
   useEffect(() => {
     const tasksToSort = data.filter((task) => !completedTasks.includes(task));
+    const filteredTasks = typeFilter
+      ? tasksToSort.filter((task) => task.type === typeFilter)
+      : tasksToSort;
+
     const sortedTasks = sortItems(
-      tasksToSort,
+      filteredTasks,
       sortCriteria,
       sortOrder,
       getValueForSorting
     );
+
     setSortedIncompletedTasks(sortedTasks);
-  }, [data, completedTasks, sortCriteria, sortOrder]);
+  }, [data, completedTasks, sortCriteria, sortOrder, typeFilter]);
 
   const handleToggleCompletion = (task) => {
     if (task.completed) {
@@ -59,10 +65,26 @@ const Tasks = ({ data, onDelete, onEdit }) => {
 
   return (
     <div>
+      <label htmlFor="type">Filter by type: </label>
+      <select
+        name="type"
+        id="type"
+        onChange={(e) => setTypeFilter(e.target.value)}
+      >
+        <option value="">All</option>
+        <option value="relaxation">relaxation</option>
+        <option value="recreational">recreational</option>
+        <option value="social">social</option>
+        <option value="education">education</option>
+        <option value="busywork">busywork</option>
+        <option value="charity">charity</option>
+        <option value="diy">diy</option>
+        <option value="cooking">cooking</option>
+        <option value="music">music</option>
+      </select>
+      <hr></hr>
       <button onClick={() => setSortCriteria("title")}>Sort by Title</button>
-      <button onClick={() => setSortCriteria("time")}>
-        Sort by Time
-      </button>
+      <button onClick={() => setSortCriteria("time")}>Sort by Time</button>
       <button
         onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
       >
