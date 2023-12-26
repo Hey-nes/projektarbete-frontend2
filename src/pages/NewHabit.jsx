@@ -43,7 +43,7 @@ const NewHabit = ({ habits, setHabits }) => {
   };
 
   return (
-    <main>
+    <main className="main">
       <h1>Create a new habit</h1>
       <div>
         <form onSubmit={handleSubmit}>
