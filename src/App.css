@@ -7,6 +7,62 @@
   pointer-events: none;
 }
 
+.appNav ul {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 2px solid black;
+  padding: 2rem;
+  list-style-type: none;
+}
+
+.appNav a {
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.appNav a:hover {
+  color: blue;
+}
+
+.main {
+  width: 75%;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.main h1,
+h2,
+h3,
+h4 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.main h5 {
+  font-size: 1.5rem;
+}
+
+.main li {
+  list-style-type: none;
+}
+
+.main div {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.main li {
+  text-align: left;
+}
+
+/* This class is specific to the friends component */
+.friend {
+  cursor: pointer;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

@@ -13,13 +13,13 @@ const App = () => {
 
   return (
     <>
-      <nav>
+      <nav className="appNav">
         <ul>
         <li>
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/tasks">Tasks</Link>
+            <Link to="/newTask">Tasks</Link>
           </li>
           <li>
             <Link to="/newhabit">New Habit</Link>
