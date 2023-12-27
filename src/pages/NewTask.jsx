@@ -2,7 +2,12 @@ import { useState } from "react";
 import Tasks from "./Tasks";
 
 const NewTask = () => {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const storedTasks = localStorage.getItem("incompletedTasks")
+      ? JSON.parse(localStorage.getItem("incompletedTasks"))
+      : [];
+    return storedTasks || [];
+  });
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [time, setTime] = useState("");

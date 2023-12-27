@@ -16,7 +16,9 @@ const getValueForSorting = (friend, criteria) => {
 
 const Friends = () => {
   const [friends, setFriends] = useState(() => {
-    const storedFriends = JSON.parse(localStorage.getItem("friends"));
+    const storedFriends = localStorage.getItem("friends")
+      ? JSON.parse(localStorage.getItem("friends"))
+      : [];
     return storedFriends || [];
   });
   const [minAge, setMinAge] = useState("");
@@ -27,7 +29,9 @@ const Friends = () => {
   const [sortedFriends, setSortedFriends] = useState([]);
 
   useEffect(() => {
-    const storedFriends = JSON.parse(localStorage.getItem("friends"));
+    const storedFriends = localStorage.getItem("friends")
+      ? JSON.parse(localStorage.getItem("friends"))
+      : [];
     if (storedFriends) {
       setFriends(storedFriends);
     }
@@ -84,7 +88,7 @@ const Friends = () => {
   const clearFriends = () => {
     localStorage.removeItem("friends");
     setFriends([]);
-  }
+  };
 
   return (
     <main className="main">

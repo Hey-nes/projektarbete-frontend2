@@ -14,11 +14,25 @@ const getValueForSorting = (task, criteria) => {
 
 const Tasks = ({ data, onDelete, onEdit }) => {
   const [completedTasks, setCompletedTasks] = useState([]);
-  const [incompletedTasks, setIncompletedTasks] = useState([]);
+  const [incompletedTasks, setIncompletedTasks] = useState(() => {
+    const storedTasks = localStorage.getItem("incompletedTasks")
+      ? JSON.parse(localStorage.getItem("incompletedTasks"))
+      : [];
+    return storedTasks || [];
+  });
   const [typeFilter, setTypeFilter] = useState("");
   const [sortCriteria, setSortCriteria] = useState("title");
   const [sortOrder, setSortOrder] = useState("asc");
   const [sortedIncompletedTasks, setSortedIncompletedTasks] = useState([]);
+
+  useEffect(() => {
+    const storedTasks = localStorage.getItem("incompletedTasks")
+      ? JSON.parse(localStorage.getItem("incompletedTasks"))
+      : [];
+    if (storedTasks) {
+      setSortedIncompletedTasks(incompletedTasks);
+    }
+  }, []);
 
   useEffect(() => {
     const tasksToSort = data.filter((task) => !completedTasks.includes(task));
@@ -34,6 +48,15 @@ const Tasks = ({ data, onDelete, onEdit }) => {
     );
 
     setSortedIncompletedTasks(sortedTasks);
+
+    if (sortedTasks.length) {
+      try {
+        localStorage.setItem("incompletedTasks", JSON.stringify(sortedTasks));
+        console.log("Tasks saved to local storage:", sortedTasks);
+      } catch (error) {
+        console.error("Error saving task to local storage", error);
+      }
+    }
   }, [data, completedTasks, sortCriteria, sortOrder, typeFilter]);
 
   const handleToggleCompletion = (task) => {
@@ -41,6 +64,9 @@ const Tasks = ({ data, onDelete, onEdit }) => {
       setCompletedTasks(completedTasks.filter((t) => t !== task));
       setIncompletedTasks([...incompletedTasks, task]);
     } else {
+      let remainingTasks = JSON.parse(localStorage.getItem("incompletedTasks"));
+      const removedTask = remainingTasks.filter((t) => t === task);
+      localStorage.setItem("incompletedTasks", JSON.stringify(removedTask));
       setCompletedTasks([...completedTasks, task]);
       setIncompletedTasks(incompletedTasks.filter((t) => t !== task));
     }
@@ -54,6 +80,10 @@ const Tasks = ({ data, onDelete, onEdit }) => {
   const handleDelete = (task) => {
     onDelete(task);
     setCompletedTasks(completedTasks.filter((t) => t !== task));
+    let remainingTasks = JSON.parse(localStorage.getItem("incompletedTasks"));
+    const removedTask = completedTasks.filter((t) => t !== task);
+    localStorage.setItem("incompletedTasks", removedTask);
+    setIncompletedTasks([removedTask]);
   };
 
   const handleEdit = (task) => {
