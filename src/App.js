@@ -33,7 +33,7 @@ const App = () => {
         </ul>
       </nav>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home habits={habits} />} />
         <Route path="/newtask" element={<NewTask />} />
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/newhabit" element={<NewHabit habits={habits} setHabits={setHabits} />} />
