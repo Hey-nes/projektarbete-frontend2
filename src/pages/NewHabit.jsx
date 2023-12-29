@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./NewHabit.css";
 
 const NewHabit = ({ habits, setHabits }) => {
   const [title, setTitle] = useState("");
@@ -66,7 +65,7 @@ const NewHabit = ({ habits, setHabits }) => {
               </select>
             </label>
           </div>
-          <button type="submit">Create new habit</button>
+          <button className="btn" type="submit">Create new habit</button>
         </form>
       </div>
     </main>

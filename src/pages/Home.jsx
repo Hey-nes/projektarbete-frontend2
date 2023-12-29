@@ -39,7 +39,7 @@ const Home = ({ habits }) => {
                 </div>
             ))}
             <Link to="/habits">
-                <button>All Habits</button>
+                <button className='btn'>All Habits</button>
             </Link>
             
             <h3>Your Tasks: </h3>
@@ -49,7 +49,7 @@ const Home = ({ habits }) => {
                 ))}
             </ul>
             <Link to="/newTask">
-                <button>All Tasks</button>
+                <button className='btn'>All Tasks</button>
             </Link>
 
             <h4>Last 5 Friends Added: </h4>

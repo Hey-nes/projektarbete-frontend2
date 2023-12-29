@@ -124,22 +124,22 @@ const Friends = () => {
       />
 
       <h4>Sort</h4>
-      <button onClick={() => setSortCriteria("firstName")}>
+      <button className='btn-sort' onClick={() => setSortCriteria("firstName")}>
         Sort by First Name
       </button>
-      <button onClick={() => setSortCriteria("lastName")}>
+      <button className='btn-sort' onClick={() => setSortCriteria("lastName")}>
         Sort by Last Name
       </button>
-      <button onClick={() => setSortCriteria("age")}>Sort by Age</button>
-      <button
+      <button className='btn-sort' onClick={() => setSortCriteria("age")}>Sort by Age</button>
+      <button className='btn-sort' 
         onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
       >
         Toggle Sort Order (
         {sortOrder === "asc" ? "Ascending Order" : "Descending Order"})
       </button>
 
-      <button onClick={addFriend}>Add Friend</button>
-      <button onClick={clearFriends}>Clear Friends</button>
+      <button className='btn-sort' onClick={addFriend}>Add Friend</button>
+      <button className='btn-sort' onClick={clearFriends}>Clear Friends</button>
       {sortedFriends.map((friend) => (
         <div key={friend.login.uuid}>
           <div className="friend" onClick={() => handleShowMore(friend)}>

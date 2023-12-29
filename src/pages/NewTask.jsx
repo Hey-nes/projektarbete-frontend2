@@ -97,9 +97,9 @@ const NewTask = () => {
         <option value="cooking">cooking</option>
         <option value="music">music</option>
       </select>
-      <button onClick={addTask}>Add task</button>
+      <button className='btn' onClick={addTask}>Add task</button>
       <h2>Don't Know What to Do?</h2>
-      <button onClick={getTask}>Press this button to get a random task</button>
+      <button className="btn" onClick={getTask}>Press this button to get a random task</button>
       <h2>Your tasks:</h2>
       <Tasks data={tasks} onDelete={handleDelete} onEdit={handleEdit} />
     </main>

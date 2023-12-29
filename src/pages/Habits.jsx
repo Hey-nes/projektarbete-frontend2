@@ -33,12 +33,12 @@ const Habits = ({ habits, setHabits }) => {
     const sortedHabits = sortHabits(habits);
 
     return (
-        <div>
+        <div className='main'>
             <h1>Your Habits</h1>
             <div>
-                <button onClick={() => setSortKey('streak')}>Sort by Streak</button>
-                <button onClick={() => setSortKey('priority')}>Sort by Priority</button>
-                <button onClick={toggleSortDirection}>
+                <button className='btn-sort' onClick={() => setSortKey('streak')}>Sort by Streak</button>
+                <button className='btn-sort' onClick={() => setSortKey('priority')}>Sort by Priority</button>
+                <button className='btn-sort' onClick={toggleSortDirection}>
                     {isAscending ? 'Sort Ascending' : 'Sort Descending'}
                 </button>
             </div>
@@ -47,9 +47,9 @@ const Habits = ({ habits, setHabits }) => {
                     <h3>{habit.title}</h3>
                     <p>Streak: {habit.streak}</p>
                     <p>Priority: {habit.priority}</p>
-                    <button onClick={() => handleStreakChange(habit, -1)} disabled={habit.streak <= 0}>Decrease Streak</button>
-                    <button onClick={() => handleStreakChange(habit, 1)}>Increase Streak</button>
-                    <button onClick={() => handleStreakChange(habit, -habit.streak)}>Reset Streak</button>
+                    <button className='btn' onClick={() => handleStreakChange(habit, -1)} disabled={habit.streak <= 0}>Decrease Streak</button>
+                    <button className='btn' onClick={() => handleStreakChange(habit, 1)}>Increase Streak</button>
+                    <button className='btn' onClick={() => handleStreakChange(habit, -habit.streak)}>Reset Streak</button>
                 </div>
             ))}
         </div>

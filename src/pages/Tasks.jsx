@@ -113,9 +113,9 @@ const Tasks = ({ data, onDelete, onEdit }) => {
         <option value="music">music</option>
       </select>
       <hr></hr>
-      <button onClick={() => setSortCriteria("title")}>Sort by Title</button>
-      <button onClick={() => setSortCriteria("time")}>Sort by Time</button>
-      <button
+      <button className="btn-sort" onClick={() => setSortCriteria("title")}>Sort by Title</button>
+      <button className="btn-sort" onClick={() => setSortCriteria("time")}>Sort by Time</button>
+      <button className="btn-sort" 
         onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
       >
         Toggle Sort Order (
@@ -140,11 +140,11 @@ const Tasks = ({ data, onDelete, onEdit }) => {
               <strong>Task type: </strong>
               {task.type}
             </li>
-            <button onClick={() => handleToggleCompletion(task)}>
+            <button className='btn' onClick={() => handleToggleCompletion(task)}>
               {task.completed ? "Mark as unfinished" : "Mark as finished"}
             </button>
-            <button onClick={() => handleEdit(task)}>Edit</button>
-            <button onClick={() => handleDelete(task)}>Delete</button>
+            <button className='btn' onClick={() => handleEdit(task)}>Edit</button>
+            <button className='btn' onClick={() => handleDelete(task)}>Delete</button>
           </div>
         ))}
       </ul>
