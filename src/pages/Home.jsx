@@ -33,7 +33,7 @@ const Home = ({ habits }) => {
             
             <h2>Your Habits: </h2>
             {topHabits.map((habit) => (
-                <div key={habit.title}>
+                <div className='habitCard' key={habit.title}>
                     <h3>{habit.title}</h3>
                     <p>Priority: {habit.priority}</p>
                 </div>

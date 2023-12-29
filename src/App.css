@@ -7,6 +7,8 @@ font-family: 'Roboto', sans-serif;
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .App {
@@ -45,8 +47,9 @@ font-family: 'Roboto', sans-serif;
 
 .main {
   width: 75%;
-  margin: 1rem auto;
+  margin: 2rem auto;
   display: flex;
+  gap: 1em;
   flex-direction: column;
   align-items: center;
 }
@@ -93,10 +96,15 @@ h4 {
   transition: 200ms;
   font-weight: bold;
   font-family: 'Inter', sans-serif;
+  font-size: 1em;
 }
 
 .btn:hover {
   background-color: #2b276d;
+}
+
+.btn:disabled {
+  background-color: #635bff5b;
 }
 
 .btn-sort {
@@ -110,8 +118,51 @@ h4 {
   transition: 200ms;
   font-weight: bold;
   font-family: 'Inter', sans-serif;
+  font-size: 1em;
 }
 
 .btn-sort:hover {
   background-color: #007ac0;
 }
+
+input {
+  padding: .5em .5em;
+  border-radius: 50em;
+  border: 1px solid black;
+}
+
+select {
+  padding: .5em .5em;
+  
+}
+
+.form--cont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  padding: 2em;
+}
+
+.form--cont label {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.habitCont {
+  padding: 1em;
+}
+
+.habitCont p {
+  margin: 1em;
+  font-size: 1em;
+}
+
+.habitCard {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  max-width: 500px;
+  border-radius: 1em;
+  padding: 1em;
+}
+

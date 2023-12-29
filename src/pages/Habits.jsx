@@ -43,7 +43,7 @@ const Habits = ({ habits, setHabits }) => {
                 </button>
             </div>
             {sortedHabits.map((habit) => (
-                <div key={habit.title}>
+                <div className='habitCont' key={habit.title}>
                     <h3>{habit.title}</h3>
                     <p>Streak: {habit.streak}</p>
                     <p>Priority: {habit.priority}</p>
